@@ -17,6 +17,7 @@ default = []
 mpio = ["mpi-sys", "hdf5-sys/mpio"]
 lzf = ["lzf-sys", "errno"]
 blosc = ["blosc-sys"]
+complex = ["num-complex", "hdf5-types/complex"]
 # The features with version numbers such as 1.10.3, 1.12.0 are metafeatures
 # and is only available when the HDF5 library is at least this version.
 # Features have_direct and have_parallel are also metafeatures and dependent
@@ -41,6 +42,7 @@ hdf5-derive = { path = "hdf5-derive", version = "0.8.1" }  # !V
 blosc-sys = { version = "0.1.1", package = "blosc-src", optional = true }
 lzf-sys = { version = "0.1", optional = true }
 cfg-if = "1.0"
+num-complex = { version = "0.4.2", optional = true, default-features = false }
 
 [dev-dependencies]
 paste = "1.0"

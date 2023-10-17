@@ -26,7 +26,7 @@ pub const fn H5G_USERTYPE(X: c_uint) -> c_uint {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone, PartialEq, PartialOrd, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
 pub enum H5G_storage_type_t {
     H5G_STORAGE_TYPE_UNKNOWN = -1,
     H5G_STORAGE_TYPE_SYMBOL_TABLE = 0,
@@ -138,7 +138,7 @@ pub struct H5G_stat_t {
     ohdr: H5O_stat_t,
 }
 
-#[cfg(feature = "1.13.0")]
+#[cfg(feature = "1.14.0")]
 extern "C" {
     pub fn H5Gclose_async(
         app_file: *const c_char, app_func: *const c_char, app_line: c_uint, group_id: hid_t,

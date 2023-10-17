@@ -11,7 +11,7 @@ use crate::h5g::H5G_obj_t;
 use crate::h5o::H5O_type_t;
 
 #[repr(C)]
-#[derive(Copy, Clone, PartialEq, PartialOrd, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
 #[cfg(not(feature = "1.12.0"))]
 pub enum H5R_type_t {
     H5R_BADTYPE = -1,
@@ -21,7 +21,7 @@ pub enum H5R_type_t {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone, PartialEq, PartialOrd, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
 #[cfg(feature = "1.12.0")]
 pub enum H5R_type_t {
     H5R_BADTYPE = -1,
@@ -120,7 +120,7 @@ extern "C" {
     pub fn H5Ropen_region(ref_ptr: *const H5R_ref_t, rapl_id: hid_t, oapl_id: hid_t) -> hid_t;
 }
 
-#[cfg(feature = "1.13.0")]
+#[cfg(feature = "1.14.0")]
 extern "C" {
     pub fn H5Ropen_attr_async(
         app_file: *const c_char, app_func: *const c_char, app_line: c_uint,

@@ -6,12 +6,12 @@ use crate::internal_prelude::*;
 pub type H5VL_class_value_t = c_int;
 
 // Incomplete type
-#[cfg(all(feature = "1.12.0", not(feature = "1.13.0")))]
+#[cfg(all(feature = "1.12.0", not(feature = "1.14.0")))]
 pub type H5VL_class_t = c_void;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-#[cfg(feature = "1.13.0")]
+#[cfg(feature = "1.14.0")]
 pub struct H5VL_class_t {
     pub version: c_uint,
     pub value: H5VL_class_value_t,
@@ -27,7 +27,7 @@ pub struct H5VL_class_t {
     pub attr_cls: H5VL_attr_class_t,
     pub dataset_cls: H5VL_dataset_class_t,
     pub datatype_cls: H5VL_datatype_class_t,
-    pub file_cl: H5VL_file_class_t,
+    pub file_cls: H5VL_file_class_t,
     pub group_cls: H5VL_group_class_t,
     pub link_cls: H5VL_link_class_t,
     pub object_cls: H5VL_object_class_t,
@@ -89,10 +89,10 @@ extern "C" {
     ) -> herr_t;
 }
 
-#[cfg(feature = "1.13.0")]
-pub use v1_13_0::*;
-#[cfg(feature = "1.13.0")]
-mod v1_13_0 {
+#[cfg(feature = "1.14.0")]
+pub use v1_14_0::*;
+#[cfg(feature = "1.14.0")]
+mod v1_14_0 {
     use std::fmt::{self, Debug};
     use std::mem::ManuallyDrop;
 

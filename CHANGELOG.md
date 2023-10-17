@@ -4,19 +4,37 @@
 
 ### Added
 
-- Support for HDF5 version 1.13.0.
+- Support for HDF5 version 1.14.0.
 - Support field renaming via `#[hdf5(rename = "new_name")]` helper attribute.
 - Add a `ByteReader` which implements `std::io::{Read, Seek}` for 1D `u8`
   datasets. Usage via `Dataset::as_byte_reader()`.
+- Add `chunk_visit` to visit all chunks in a dataset.
+- Implement `H5Type` for `num_complex::Complex`.
+- Adding feature `static` for the `hdf5` crate which downloads and builds a bundled HDF5.
 
 ### Changed
 
 - The `H5Type` derive macro now uses `proc-macro-error` to emit error messages.
+- MSRV is now `1.64.0` and Rust edition has now been bumped to 2021.
+- Types in ChunkInfo has been changed to match HDF5.
+- Dependencies now uses the `dep:` syntax and are only enabled through features.
+- Some features are made weak and will not enable e.g. static build when asking for a
+  library which is threadsafe.
+- Requesting a feature which is not compiled in the dynamic HDF5 library will
+  now cause a compile time error.
+- The bundled version of HDF5 in `hdf5-src` is now 1.14.1.
 
 ### Fixed
 
 - Fixed a bug where `H5Pget_fapl_direct` was only included when HDF5 was compiled
   with feature `have-parallel` instead of `have-direct`.
+- Fixed a missing symbol when building `hdf5-src` with `libz-sys`.
+- Fixed a bug where errors were only silenced on the main thread.
+- Fixed a memory leak when opening datasets.
+- Avoid creating unaligned references in `H5Type` derive macro.
+- Applying filters without chunking will now produce an explicit error.
+- Fixed a bug where chunking could not be enabled for zero-sized extents.
+- Fixed library finding on Windows with MSYS2-distributed MinGW HDF5.
 
 ## 0.8.1
 

@@ -5,7 +5,7 @@ use std::io::{Read, Seek, SeekFrom};
 use ndarray::{s, Array1, Array2, ArrayD, IxDyn, SliceInfo};
 use rand::prelude::{Rng, SeedableRng, SmallRng};
 
-use hdf5_types::{H5Type, TypeDescriptor};
+use hdf5_types::TypeDescriptor;
 
 mod common;
 
@@ -349,6 +349,17 @@ fn test_create_on_databuilder() {
     let _ds = file.new_dataset_builder().with_data(&[1_i32, 2, 3]).create("ds2").unwrap();
     let _ds = file.new_dataset::<i32>().create("ds3").unwrap();
     let _ds = file.new_dataset::<i32>().shape(2).create("ds4").unwrap();
+}
+
+#[test]
+fn test_issue_223() {
+    let file = new_in_memory_file().unwrap();
+
+    let data: &[u16] = &[];
+    let _ds = file.new_dataset_builder().deflate(3).with_data(data).create("ds2").unwrap();
+
+    let data: Array2<u16> = Array2::from_shape_fn((0, 0), |(_i, _j)| unreachable!());
+    let _ds = file.new_dataset_builder().deflate(3).with_data(&data).create("ds3").unwrap();
 }
 
 #[test]

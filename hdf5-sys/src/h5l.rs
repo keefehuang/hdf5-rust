@@ -14,7 +14,7 @@ pub const H5L_SAME_LOC: hid_t = 0;
 pub const H5L_LINK_CLASS_T_VERS: c_uint = 0;
 
 #[repr(C)]
-#[derive(Copy, Clone, PartialEq, PartialOrd, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
 pub enum H5L_type_t {
     H5L_TYPE_ERROR = -1,
     H5L_TYPE_HARD = 0,
@@ -336,7 +336,7 @@ pub use self::{
     H5L_info2_t as H5L_info_t, H5L_iterate2_t as H5L_iterate_t, H5Literate2 as H5Literate,
 };
 
-#[cfg(feature = "1.13.0")]
+#[cfg(feature = "1.14.0")]
 extern "C" {
     pub fn H5Lcreate_hard_async(
         app_file: *const c_char, app_func: *const c_char, app_line: c_uint, cur_loc_id: hid_t,

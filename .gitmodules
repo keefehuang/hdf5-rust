@@ -1,3 +1,3 @@
 [submodule "hdf5"]
 	path = hdf5-src/ext/hdf5
-	url = https://github.com/HDFGroup/hdf5.git
+	url = https://github.com/mulimoen/hdf5.git
